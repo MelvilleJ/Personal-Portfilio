@@ -21,5 +21,3 @@ It features smooth animations powered by **Framer Motion** and integrates with *
 Live Demo 👉 [me.mellylab.com](https://me.mellylab.com)
 
 ---
-- npm install
-- npm run dev
