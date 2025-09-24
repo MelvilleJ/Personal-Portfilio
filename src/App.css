@@ -1,0 +1,53 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Maven+Pro:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.section-home {
+  min-height: 100vh;
+  max-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  box-sizing: border-box;
+}
+
+.bg-main {
+  background-color: #032047 !important;
+}
+.text-green {
+  color: #7ae582 !important;
+}
+.bg-neongreen {
+  background-color: #7ae582 !important;
+}
+.text-main {
+  color: #032047 !important;
+}
+.raleway-sub {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: thin;
+}
+
+/*@media (max-width: 768px) {
+  .section-home {
+    padding: 50px;
+  }
+  .section-about {
+    padding: 50px;
+  }
+  .raleway-sub {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.2rem;
+  }
+}*/
