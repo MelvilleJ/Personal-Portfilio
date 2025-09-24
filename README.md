@@ -21,7 +21,5 @@ It features smooth animations powered by **Framer Motion** and integrates with *
 Live Demo 👉 [me.mellylab.com](https://me.mellylab.com)
 
 ---
-
-- git clone https://github.com/melvillej/personal-portfolio.git
-- cd personal-portfolio
+- npm install
 - npm run dev
