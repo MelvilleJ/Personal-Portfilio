@@ -9,7 +9,7 @@ function CONTACT() {
   const [loading, setLoading] = useState(false);
 
   const webhookUrl =
-    "https://n8n.mellylab.com/webhook/248dcaba-2b7d-4c06-b097-d205874f1f6c";
+    "your-n8n-webhook-url";
 
   const handleSubmit = async () => {
     if (!name || !email || !message) {
