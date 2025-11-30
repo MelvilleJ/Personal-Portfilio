@@ -75,7 +75,7 @@ function HERO() {
         className="raleway-sub my-50 mx-auto flex flex-col justify-center items-center h-full"
       >
         <h1 className="text-center text-3xl sm:text-2xl md:text-7xl  text-white">
-          Hey, I'm
+          Hi, I'm
         </h1>
         <h1 className="text-center text-5xl md:text-8xl  text-white font-bold">
           Joshua Melville,
