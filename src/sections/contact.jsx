@@ -38,7 +38,7 @@ function CONTACT() {
       setMessage("");
     } catch (error) {
       console.error(error);
-      setStatus("Error sending message. Please try again later.");
+      setStatus("Error sending message. Please contact me via email or try again later.");
     } finally {
       setLoading(false);
     }
