@@ -1,0 +1,4 @@
+User-agents: *
+Allow: /
+
+Sitemap: https://me.mellylab.com/sitemap.xml
