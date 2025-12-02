@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 const ProjectCard = ({
   title,
+  id,
   description,
   category,
   image,
@@ -9,7 +10,8 @@ const ProjectCard = ({
   delay = 0,
 }) => {
   return (
-    <motion.div
+    <motion.a
+      href = {`/projects/${id}`}
       initial={{ opacity: 0, y: 50, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       whileHover={{ y: -10, scale: 1.02 }}
@@ -68,7 +70,7 @@ const ProjectCard = ({
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/10 to-transparent" />
       </div>
-    </motion.div>
+    </motion.a>
   );
 };
 
