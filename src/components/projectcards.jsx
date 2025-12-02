@@ -11,7 +11,7 @@ const ProjectCard = ({
 }) => {
   return (
     <motion.a
-      href = {`/projects/${id}`}
+      href = {`/projectdetails/${id}`}
       initial={{ opacity: 0, y: 50, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       whileHover={{ y: -10, scale: 1.02 }}
