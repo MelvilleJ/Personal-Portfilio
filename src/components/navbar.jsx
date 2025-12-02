@@ -44,7 +44,7 @@ function NAVBAR({ name }) {
           <li>
             <a
               href="#about"
-              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline" || currentPath === "/projectdetails" ? "hidden disabled" : "hover:underline"
+              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline" 
               }
             >
               About
@@ -53,7 +53,7 @@ function NAVBAR({ name }) {
           <li>
             <a
               href="/projects"
-              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline" || currentPath === "/projectdetails" ? "hidden disabled" : "hover:underline"
+              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline"
               }
             >
               Projects
@@ -62,7 +62,7 @@ function NAVBAR({ name }) {
           <li>
             <a
               href="#contact"
-              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline" || currentPath === "/projectdetails" ? "hidden disabled" : "hover:underline"
+              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline"
               }
             >
               Contact
