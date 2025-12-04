@@ -9,7 +9,7 @@ export const projects = [
   {
     id: 1,
     title: "n8n Business Automations",
-    description:
+    summary:
       "Docker Deployed Local n8n Instance and created multiple AI driven automations ranging from Auto Email Handling to Chatbot Integration.",
     category: "AI Automation",
     image: project2Img,
@@ -17,7 +17,7 @@ export const projects = [
   {
     id: 2,
     title: "Project: Leslie",
-    description:
+    summary:
       "Personal AI assistant that can answer questions on data pertaining to myself and provide information on various topics.",
 
     category: "FULL STACK + Generative AI Engineering",
@@ -26,7 +26,7 @@ export const projects = [
   {
     id: 3,
     title: "Local AI Chat Bot Coding Assistant",
-    description:
+    summary:
       "Local Chatbox to server as a private and secure OPEN AI replacement for document generation and general AI tasks.",
     category: "Server Deployment + Generative AI Engineering",
     image: project3Img,
@@ -34,7 +34,7 @@ export const projects = [
   {
     id: 4,
     title: "POSINCO Lease Management System",
-    description:
+    summary:
       "Full Web-based System to Store and Manage Leases for POSINCO.",
     category: "Full Stack",
     image: project4Img,
@@ -42,7 +42,7 @@ export const projects = [
   {
     id: 5,
     title: "PATT Physical TD4 Digitization System",
-    description:
+    summary:
       "Full Web-based System to Digitize Physical TD4s for the Port Authorities' Human Resource Management System.",
     category: "Full Stack",
     image: project4Img,
@@ -50,7 +50,7 @@ export const projects = [
   {
     id: 6,
     title: "NAS and File Server Management System",
-    description:
+    summary:
       "Full Web-based System for NAS and File Server Management. System uses various custom scripts to automate and validate backups.",
     category: "FULL STACK + Generative AI Engineering",
     image: project5Img,
@@ -58,7 +58,7 @@ export const projects = [
   {
     id: 7,
     title: "Project Patience",
-    description:
+    summary:
       "Probation attachment to a HRMS. Sends email notifications, handles supervisor and manager remarks as well as employee onboarding.",
     category: "FULL STACK",
     image: project6Img,

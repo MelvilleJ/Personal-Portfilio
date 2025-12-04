@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const ProjectCard = ({
   title,
   id,
-  description,
+  summary,
   category,
   image,
   color,
@@ -62,7 +62,7 @@ const ProjectCard = ({
           transition={{ delay: delay + 0.4 }}
           className="text-white/90 text-sm leading-relaxed line-clamp-3"
         >
-          {description}
+          {summary}
         </motion.p>
       </div>
 

@@ -1,7 +1,7 @@
 import { useState} from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { projects } from "../data/projects";
+import { projects } from "../data/projectdetails";
 export default function ProjectDetails() {
     const { id } = useParams();
     const project = projects.find((project) => project.id === Number(id));
@@ -33,7 +33,7 @@ export default function ProjectDetails() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          {project.description}
+          {project.summary}
         </motion.p>
       </motion.div>
     </div>

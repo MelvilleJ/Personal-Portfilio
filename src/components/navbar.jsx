@@ -1,13 +1,25 @@
 import logo1 from "../assets/jm.png";
 import logo2 from "../assets/jm-black.png";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { path } from "framer-motion/client";
 
-function NAVBAR({ name }) {
+function NAVBAR({}) {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [atTop, setAtTop] = useState(true);
-  const currentPath = window.location.pathname;
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const isPathMatch = (path, pattern) => {
+    if (pattern.includes(":")) {
+     const basePattern = pattern.replace("/:id", ""); 
+     return path.startsWith(basePattern);
+    }
+    return path === pattern;
+  };
+  const hidden = (hidden) => {
+    return hidden.some(path => isPathMatch(currentPath, path));
+  }
   const controlNavbar = () => {
     const currentScroll = window.scrollY;
     setAtTop(currentScroll === 0);
@@ -44,7 +56,7 @@ function NAVBAR({ name }) {
           <li>
             <a
               href="#about"
-              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline" 
+              className={  hidden(["/projects", "/projectdetails/:id"]) ? "hidden disabled" : "hover:underline" 
               }
             >
               About
@@ -53,7 +65,7 @@ function NAVBAR({ name }) {
           <li>
             <a
               href="/projects"
-              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline"
+              className={  hidden(["/projects", "/projectdetails/:id"]) ? "hidden disabled" : "hover:underline" 
               }
             >
               Projects
@@ -62,7 +74,7 @@ function NAVBAR({ name }) {
           <li>
             <a
               href="#contact"
-              className={  currentPath === "/projects" ? "hidden disabled" : "hover:underline"
+              className={  hidden(["/projects", "/projectdetails/:id"]) ? "hidden disabled" : "hover:underline" 
               }
             >
               Contact
