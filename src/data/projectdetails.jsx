@@ -12,6 +12,11 @@ export const projects = [
     summary:
       "Docker Deployed Local n8n Instance and created multiple AI driven automations ranging from Auto Email Handling to Chatbot Integration.",
     category: "AI Automation",
+    technologies: ["n8n", "Docker", "JavaScript", "PostgreSql", "Python"],
+    features: ["AI Powered Automation", "Google Cloud Platform Deployment", "Meta Business Suite Deployment","Email Automation", "Chatbot Integration", "Key Email Alerts"],
+    description:"",
+    github: "https://github.com/melvillej/",
+
     image: project2Img,
   },
   {
