@@ -116,7 +116,7 @@ export const projects = [
     title: "NAS and File Server Management System",
     summary:
       "A full-stack web system for monitoring and managing NAS and file servers, equipped with automated backup verification and AI-assisted diagnostics.",
-    category: "FULL STACK + Generative AI Engineering",
+    category: "Networking + Full Stack",
     technologies: ["Next.js", "Bash", "Python", "Docker"],
     features: [
       "Backup Automation & Validation",
@@ -141,18 +141,55 @@ export const projects = [
   },
   {
     id: 5,
-    title: "PATT Physical TD4 Digitization System",
+    title: "Enterprise Document Digitization System (NDA-Protected)",
     summary:
-      "Full Web-based System to Digitize Physical TD4s for the Port Authorities' Human Resource Management System.",
+      "A secure, internal-use digitization platform created for a government agency. All functional details, integrations, and workflow descriptions have been redacted due to an active NDA.",
     category: "Full Stack",
+    technologies: [],
+    features: ["Redacted due to NDA"],
+    challenges: ["Redacted due to NDA"],
+    outcome:
+      "Delivered a production-ready system that modernized internal document handling processes. Specific implementation details and performance results cannot be publicly disclosed.",
+    description:
+      "This system was designed to digitize and manage sensitive internal documentation. Technical architecture, database structure, and operational behavior remain confidential under NDA and cannot be displayed in a public portfolio.",
+    duration: "1.5 months",
+    year: "2025",
     image: project4Img,
   },
   {
     id: 7,
-    title: "Project Patience",
+    title: "HRMS Workflow Automation Module (NDA-Protected)",
     summary:
-      "Probation attachment to a HRMS. Sends email notifications, handles supervisor and manager remarks as well as employee onboarding.",
+      "A proprietary HR workflow automation extension developed for a corporate Human Resource Management System. All specific project details are withheld as required under NDA.",
     category: "FULL STACK",
+    technologies: [],
+    features: ["Redacted due to NDA"],
+    challenges: ["Redacted due to NDA"],
+    outcome:
+      "Successfully implemented within the client’s internal HR ecosystem. Further information is restricted in compliance with confidentiality obligations.",
+    description:
+      "This project involved extending an existing HRMS with confidential internal workflows. The logic, data structures, and automation processes cannot be shared due to non-disclosure restrictions.",
+    duration: "1 month",
+    year: "2025",
     image: project6Img,
+  },
+  {
+    id: 4,
+    title: "Enterprise Lease Management System (NDA-Protected)",
+    summary:
+      "A full-stack web application developed for an enterprise client to streamline internal lease management workflows. Due to a Non-Disclosure Agreement, all technical and operational details have been redacted.",
+    category: "Full Stack",
+    technologies: [],
+    features: ["Features redacted due to NDA"],
+    challenges: [
+      "Details regarding development challenges are confidential under an NDA agreement and cannot be shared.",
+    ],
+    outcome:
+      "Successfully delivered a secure, scalable internal system. Specific outcomes, metrics, and client processes are withheld in compliance with NDA requirements.",
+    description:
+      "This project involved building a proprietary enterprise-grade system. The architecture, workflow logic, and integration points are not publicly shareable. Only high-level information can be disclosed to respect the client’s confidentiality obligations.",
+    duration: "3 months",
+    year: "2025",
+    image: project4Img,
   },
 ];

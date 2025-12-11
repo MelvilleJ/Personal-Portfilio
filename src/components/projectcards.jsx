@@ -11,7 +11,7 @@ const ProjectCard = ({
 }) => {
   return (
     <motion.a
-      href = {`/projectdetails/${id}`}
+      href={`/projectdetails/${id}`}
       initial={{ opacity: 0, y: 50, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       whileHover={{ y: -10, scale: 1.02 }}
@@ -26,7 +26,6 @@ const ProjectCard = ({
       className={`project-card project-card-${color} group cursor-pointer 
         rounded-2xl overflow-hidden relative bg-black/20`}
     >
-      {/* Image Section */}
       <div className="h-40 md:h-48 lg:h-56 overflow-hidden">
         <motion.img
           src={image}
@@ -36,7 +35,6 @@ const ProjectCard = ({
         />
       </div>
 
-      {/* Content Section */}
       <div className="p-6 space-y-3">
         <motion.div
           initial={{ opacity: 0 }}
@@ -66,7 +64,6 @@ const ProjectCard = ({
         </motion.p>
       </div>
 
-      {/* Hover Glow Effect */}
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/10 to-transparent" />
       </div>

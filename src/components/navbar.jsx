@@ -12,14 +12,14 @@ function NAVBAR({}) {
   const currentPath = location.pathname;
   const isPathMatch = (path, pattern) => {
     if (pattern.includes(":")) {
-     const basePattern = pattern.replace("/:id", ""); 
-     return path.startsWith(basePattern);
+      const basePattern = pattern.replace("/:id", "");
+      return path.startsWith(basePattern);
     }
     return path === pattern;
   };
   const hidden = (hidden) => {
-    return hidden.some(path => isPathMatch(currentPath, path));
-  }
+    return hidden.some((path) => isPathMatch(currentPath, path));
+  };
   const controlNavbar = () => {
     const currentScroll = window.scrollY;
     setAtTop(currentScroll === 0);
@@ -56,7 +56,10 @@ function NAVBAR({}) {
           <li>
             <a
               href="#about"
-              className={  hidden(["/projects", "/projectdetails/:id"]) ? "hidden disabled" : "hover:underline" 
+              className={
+                hidden(["/projects", "/projectdetails/:id"])
+                  ? "hidden disabled"
+                  : "hover:underline"
               }
             >
               About
@@ -65,7 +68,8 @@ function NAVBAR({}) {
           <li>
             <a
               href="/projects"
-              className={  hidden(["/projects", "/projectdetails/:id"]) ? "hidden disabled" : "hover:underline" 
+              className={
+                hidden(["/projects"]) ? "hidden disabled" : "hover:underline"
               }
             >
               Projects
@@ -74,7 +78,10 @@ function NAVBAR({}) {
           <li>
             <a
               href="#contact"
-              className={  hidden(["/projects", "/projectdetails/:id"]) ? "hidden disabled" : "hover:underline" 
+              className={
+                hidden(["/projects", "/projectdetails/:id"])
+                  ? "hidden disabled"
+                  : "hover:underline"
               }
             >
               Contact

@@ -5,7 +5,7 @@ function CONTACT() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState(""); // To show confirmation or error
+  const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
   const webhookUrl = import.meta.env.VITE_WEBHOOKURL;
@@ -26,19 +26,19 @@ function CONTACT() {
 
       const data = await response.json();
 
-      // Handle webhook response (adjust field if needed)
       let reply = data.output || "Thank you for your message!";
       reply = reply.replace(/^"(.*)"$/, "$1").replace(/\\u2019/g, "’");
 
       setStatus(reply);
 
-      // Clear form
       setName("");
       setEmail("");
       setMessage("");
     } catch (error) {
       console.error(error);
-      setStatus("Error sending message. Please contact me via email or try again later.");
+      setStatus(
+        "Error sending message. Please contact me via email or try again later."
+      );
     } finally {
       setLoading(false);
     }
