@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "../components/projectcards.jsx";
-import { projects } from "../data/projects";
+import { projects } from "../data/projects.jsx";
 const ProjectsSection = () => {
   return (
     <div

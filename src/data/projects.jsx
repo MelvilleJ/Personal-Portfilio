@@ -1,4 +1,3 @@
-
 import project1Img from "../assets/projectimages/project1.png";
 import project2Img from "../assets/projectimages/project2.png";
 import project3Img from "../assets/projectimages/project3.png";
@@ -18,7 +17,7 @@ export const projects = [
     id: 2,
     title: "Project: Leslie",
     summary:
-      "Personal AI assistant that can answer questions on data pertaining to myself and provide information on various topics.",
+      "Personal AI assistant that can answer questions on data pertaining to my personal knowledge base and provide information on various topics.",
 
     category: "FULL STACK + Generative AI Engineering",
     image: project1Img,
@@ -34,8 +33,7 @@ export const projects = [
   {
     id: 4,
     title: "POSINCO Lease Management System",
-    summary:
-      "Full Web-based System to Store and Manage Leases for POSINCO.",
+    summary: "Full Web-based System to Store and Manage Leases for POSINCO.",
     category: "Full Stack",
     image: project4Img,
   },
