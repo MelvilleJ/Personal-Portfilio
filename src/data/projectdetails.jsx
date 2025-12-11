@@ -23,14 +23,14 @@ export const projects = [
     ],
     challenges: [
       "Building secure REST API access points for n8n workflows was one of the most complex components. This included configuring authentication layers, request validation, and ensuring reliable communication between external systems and internal automation pipelines.",
-      "Configuring multiple third-party APIs—Google Cloud Platform, Meta Business Suite, and Telegram—required careful handling of OAuth flows, webhook verification, and platform-specific quirks. Meta Business Suite was by far the most challenging due to strict validation rules and messaging policies.",
+      "Configuring multiple third-party APIs-Google Cloud Platform, Meta Business Suite, and Telegram—required careful handling of OAuth flows, webhook verification, and platform-specific quirks. Meta Business Suite was by far the most challenging due to strict validation rules and messaging policies.",
       "Developing and refining AI tools to deliver consistent, accurate outputs required extensive experimentation across both local and cloud-based models. Tuning prompts, reducing hallucinations, and optimizing responses was an iterative process.",
       "Preventing conversational AI loops or repetitive behavior required implementing guardrails, context checks, and custom logic inside workflows to detect and break infinite conversational cycles.",
     ],
     outcome:
       "The final automation suite significantly reduced manual workload by streamlining email processing, accelerating response times, and centralizing chatbot interactions into a unified automation system. The solution operates reliably in production, enabling efficient multi-platform communication and scalable AI-assisted tasks.",
     description:
-      "This project involved building a comprehensive automation ecosystem using n8n, leveraging Docker for isolated and reproducible deployment. I created a series of interconnected workflows that fused AI processing with operational tasks—such as parsing emails, generating responses, triggering alerts, and interacting with chatbots on Meta, Telegram, and custom APIs. Integrations with Google Cloud and Meta Business Suite enabled advanced messaging capabilities, while PostgreSQL provided persistent workflow storage. Through iterative testing, prompt engineering, and API refinement, I delivered a robust automation platform tailored for real-world business needs.",
+      "This project involved building a comprehensive automation ecosystem using n8n, leveraging Docker for isolated and reproducible deployment. I created a series of interconnected workflows that fused AI processing with operational tasks-such as parsing emails, generating responses, triggering alerts, and interacting with chatbots on Meta, Telegram, and custom APIs. Integrations with Google Cloud and Meta Business Suite enabled advanced messaging capabilities, while PostgreSQL provided persistent workflow storage. Through iterative testing, prompt engineering, and API refinement, I delivered a robust automation platform tailored for real-world business needs.",
     duration: "2 months",
     year: "2025",
     image: project2Img,
