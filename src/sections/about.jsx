@@ -6,103 +6,76 @@ const FloatingBlobs = () => {
   const isInView = useInView(ref, { once: false, amount: 0.2 });
 
   const blobVariants = {
-    hidden: { opacity: 0, scale: 0, y: 100 },
+    hidden: { opacity: 0, scale: 0 },
     visible: {
       opacity: 1,
       scale: 1,
-      y: 0,
       transition: { duration: 1.5, ease: "easeOut" },
     },
   };
 
-  const floatingAnimation = {
-    y: [-10, 10, -10],
-    x: [-5, 5, -5],
-    transition: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-  };
-
   return (
-    <div ref={ref} className="absolute inset-0 z-0">
-      {/* Blob 1 */}
+    <div ref={ref} className="absolute inset-0 z-0 overflow-hidden">
+      {/* Blob 1 — top right, blue */}
       <motion.svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
+        className="absolute -top-24 -right-24 w-[480px] h-[480px]"
+        viewBox="-100 -100 200 200"
         variants={blobVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         <motion.path
-          d="M44.7,23.6C58.8,30.8,71.8,43.8,79.1,59.9C86.4,76,87.9,95.2,85.1,86.4C82.4,68,75.4,50.4,64.2,36.6C53,22.8,37.6,12.8,20.3,10.3C3,7.8,16.2,12.8,33.8,21.2C51.4,29.6,67.4,41.4,76.8,56.8C86.2,72.2,89,90.2,86.3,107.4C83.6,124.6,75.4,141,63.9,154.2C52.4,167.4,37.6,177.4,21.8,182.8C6,188.2,10.8,189,26.7,184.4C42.6,179.8,57.6,169.8,44.7,76.4Z"
-          fill="rgba(59, 130, 246, 0.15)"
-          animate={floatingAnimation}
-        >
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="0 50 50; 360 50 50"
-            dur="30s"
-            repeatCount="indefinite"
-          />
-        </motion.path>
+          d="M48,-60C58.5,-50.8,62,-33.8,67.2,-18.2C72.4,-2.6,79.3,11.6,76.5,23.8C73.7,36,61.2,46.2,48.5,56.3C35.8,66.4,22.9,76.4,8.9,77.5C-5.1,78.6,-20.2,70.8,-34.2,61.4C-48.2,52,-61.1,41,-67.8,27C-74.5,13,-75,-3.8,-69.8,-18.2C-64.6,-32.6,-53.7,-44.6,-41.5,-54.2C-29.3,-63.8,-15.7,-71,0.3,-71.4C16.3,-71.8,37.5,-69.2,48,-60Z"
+          fill="rgba(59, 130, 246, 0.18)"
+          animate={{ y: [-15, 15, -15], x: [-8, 8, -8], rotate: [0, 360] }}
+          transition={{
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+          }}
+        />
       </motion.svg>
 
-      {/* Blob 2 */}
+      {/* Blob 2 — bottom left, cyan */}
       <motion.svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
+        className="absolute -bottom-24 -left-24 w-[400px] h-[400px]"
+        viewBox="-100 -100 200 200"
         variants={blobVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         transition={{ delay: 0.5 }}
       >
         <motion.path
-          d="M37.8,34.9C49.5,41.3,59.4,54.4,65.6,69.2C71.8,84,74.3,99.6,72.2,83.8C70.1,68,63.4,52.8,53.2,41.3C43,29.8,29.3,22,14.1,21.1C-1.1,20.2,17.8,26.2,32.4,35.1C47,44,59.5,55.8,66.8,70.3C74.1,84.8,76.2,101.9,73.4,118.2C70.6,134.5,62.9,150,51.4,157.6C39.9,165.2,24.6,164.9,9.8,167.1C-5,169.3,19.5,173.9,37.8,65.1Z"
-          fill="rgba(6, 182, 212, 0.12)"
-          animate={{
-            y: [5, -5, 5],
-            x: [3, -3, 3],
-            transition: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+          d="M42.7,-52.4C54.9,-42.7,63.5,-27.6,67.8,-10.7C72.1,6.2,72.1,24.9,64.3,40.5C56.5,56.1,41,68.6,23.3,74.8C5.6,81,-14.3,80.9,-30.7,73.7C-47.1,66.5,-60,52.2,-66.4,35.6C-72.8,19,-72.7,0.1,-67.4,-16.7C-62.1,-33.5,-51.6,-48.2,-38.2,-57.9C-24.8,-67.6,-8.6,-72.3,6.7,-70C22,-67.7,30.5,-62.1,42.7,-52.4Z"
+          fill="rgba(6, 182, 212, 0.14)"
+          animate={{ y: [10, -10, 10], x: [6, -6, 6], rotate: [0, -360] }}
+          transition={{
+            y: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
           }}
-        >
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="180 50 50; -180 50 50"
-            dur="25s"
-            repeatCount="indefinite"
-          />
-        </motion.path>
+        />
       </motion.svg>
 
-      {/* Blob 3 */}
+      {/* Blob 3 — mid left, purple */}
       <motion.svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
+        className="absolute top-1/3 -left-20 w-72 h-72"
+        viewBox="-100 -100 200 200"
         variants={blobVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         transition={{ delay: 1.0 }}
       >
         <motion.path
-          d="M25.7,55.2C33.2,60.8,38.7,70.6,42.1,81.2C45.5,91.8,46.8,103.2,44.8,86.1C42.8,75.4,37.5,65.4,29.9,58.6C22.3,51.8,12.4,48.2,1.8,50.8C-8.8,53.4,19.9,62.2,28.4,72.6C36.9,83,42.8,95,44.2,108.2C45.6,121.4,42.5,135.8,35.4,142.2C28.3,148.6,17.2,146.9,6.8,147.8C-3.6,148.7,18.2,152.2,25.7,55.2Z"
-          fill="rgba(147, 51, 234, 0.1)"
-          animate={{
-            y: [-3, 3, -3],
-            x: [-2, 2, -2],
-            transition: { duration: 15, repeat: Infinity, ease: "easeInOut" },
+          d="M38.5,-48.7C51.4,-38.9,64.7,-28.8,69.2,-15.4C73.7,-2,69.4,14.7,61.5,29.5C53.6,44.3,42.1,57.2,28,64.8C13.9,72.4,-2.8,74.7,-18.3,70.6C-33.8,66.5,-48.1,56,-56.9,42.1C-65.7,28.2,-69,10.9,-67.8,-5.8C-66.6,-22.5,-61,-38.6,-50.4,-48.9C-39.8,-59.2,-24.2,-63.7,-9.1,-65.5C6,-67.3,20.4,-66.4,38.5,-48.7Z"
+          fill="rgba(147, 51, 234, 0.12)"
+          animate={{ y: [-8, 8, -8], x: [-4, 4, -4], rotate: [0, 360] }}
+          transition={{
+            y: { duration: 11, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 13, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 40, repeat: Infinity, ease: "linear" },
           }}
-        >
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="90 50 50; 450 50 50"
-            dur="40s"
-            repeatCount="indefinite"
-          />
-        </motion.path>
+        />
       </motion.svg>
     </div>
   );

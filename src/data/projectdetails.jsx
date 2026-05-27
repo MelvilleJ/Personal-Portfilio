@@ -1,12 +1,203 @@
 import project1Img from "../assets/projectimages/project1.png";
-import project2Img from "../assets/projectimages/project2.png";
+import project2Img from "../assets/hrms/employeeview.png";
 import project3Img from "../assets/projectimages/project3.png";
-import project4Img from "../assets/projectimages/project4.png";
+import project4Img from "../assets/leasetracking/search.png";
 import project5Img from "../assets/projectimages/project5.png";
 import project6Img from "../assets/projectimages/project6.png";
+import project7Img from "../assets/td4/dashboard.png";
+import project8Img from "../assets/n8n/workflow.png";
+import project9Img from "../assets/post-it/main.png";
+import project10Img from "../assets/helpdesk/queue.png";
+import project11Img from "../assets/patthub/main.png";
 export const projects = [
   {
     id: 1,
+    title: "Human Resources Management System",
+    summary:
+      "Human Resources Management System for managing employee data and HR processes at the Port Authourity of Trinidad and Tobago.",
+    category: "Full Stack",
+    technologies: [
+      "Node.js",
+      "HTML/CSS",
+      "JavaScript",
+      "MS SQL Server",
+      "Docker",
+    ],
+    features: [
+      "Centralized Employee Database",
+      "Onboarding & Offboarding Automation",
+      "Training & Certification Tracking",
+      "Email Notifications & Alerts",
+      "Leave Management System",
+      "Role-Based Access Control",
+      "Custom Organizational Chart Builder",
+      "Medical & Emergency Contact Management",
+      "Performance Review Module",
+      "Payment & Payroll Integration",
+      "Excel Styled Pivot Table Report Builder",
+    ],
+    challenges: [
+      "Understaning and modeling complex HR processes and data relationships required close collaboration with HR stakeholders to ensure the system met real-world needs.",
+      "Converting legacy paper-based workflows into efficient digital processes involved careful UI/UX design and iterative testing to ensure user adoption.",
+      "Creating a secure, scalable database schema to handle sensitive employee data while maintaining performance was a critical aspect of the project.",
+      "Integrating email notifications and alerts required building a reliable messaging system that could handle various HR events and trigger appropriate communications.",
+    ],
+    outcome:
+      "The final HRMS provided a comprehensive solution for managing employee data and HR processes, significantly improving efficiency and accuracy. The system is now a core tool for the Port Authority's HR department, streamlining operations and enhancing employee management.",
+    description:
+      "This project involved building a full-stack Human Resources Management System tailored to the needs of the Port Authority of Trinidad and Tobago. The system features a centralized employee database, automated onboarding/offboarding workflows, training tracking, and performance review modules. Built with Node.js and MS SQL Server, the application is deployed using Docker for scalability and ease of maintenance. The HRMS has become an essential tool for managing employee data and streamlining HR processes within the organization.",
+    duration: "Ongoing",
+    year: "2025",
+    image: project2Img,
+  },
+  {
+    id: 10,
+    title: "IT Help Desk Ticketing and Task Management System",
+    summary:
+      "Full Web-based System for IT Help Desk Ticketing and Task Management.",
+    category: "Full Stack",
+    technologies: [
+      "Node.js",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "MS SQL Server",
+      "Docker",
+    ],
+    features: [
+      "Ticket Creation, Assignment & Management",
+      "Priority & Category Classification",
+      "Technician Task Assignment & Workload Tracking",
+      "Real-Time Status Updates",
+      "Email Notifications for Ticket Events",
+      "SLA Tracking & Escalation Alerts",
+      "Analytics & Reporting Dashboard",
+      "Role-Based Access Control",
+    ],
+    challenges: [
+      "Designing a flexible ticketing schema that could accommodate various IT issue categories and workflows required multiple iterations with IT staff to capture real-world needs.",
+      "Building an SLA tracking system that accurately calculated response and resolution times across business hours required complex time-handling logic.",
+      "Implementing real-time ticket status updates and notifications without full WebSocket support required efficient polling strategies and careful state management.",
+      "Ensuring role-based access control was correctly enforced across all views and actions required thorough testing of permission logic at both the UI and API level.",
+    ],
+    outcome:
+      "The Help Desk system centralized IT request management, significantly reducing response times and improving visibility into technician workloads. The system is now in active use, streamlining IT support operations across the organization.",
+    description:
+      "This full-stack IT Help Desk system provides a centralized platform for managing IT support tickets and tasks. Users can submit tickets with priority levels and categories, while technicians receive assignments and track tasks through a personal dashboard. Administrators have oversight of the full queue, technician performance, and SLA compliance. Built with Node.js and MS SQL Server and containerized with Docker, the system is designed for reliability and ease of deployment within an enterprise environment.",
+    duration: "2 months",
+    year: "2025",
+    image: project10Img,
+  },
+  {
+    id: 11,
+    title: "PATT Hub",
+    summary:
+      "Web dashboard for managing and organizing internal web-applications.",
+    category: "Full Stack",
+    technologies: [
+      "Node.js",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Docker",
+    ],
+    features: [
+      "Centralized Internal Application Dashboard",
+      "Quick-Access Tiles for Internal Systems",
+      "Application Status Monitoring",
+      "Role-Based Application Visibility",
+      "Search & Filter Functionality",
+      "Administrative App Management Interface",
+    ],
+    challenges: [
+      "Designing a dashboard that could surface a wide variety of internal applications in a clear, organized layout required close collaboration with department stakeholders.",
+      "Implementing role-based visibility to ensure users only see applications relevant to their department required a flexible permissions model.",
+      "Maintaining up-to-date application status indicators required integrating lightweight health-check mechanisms for each registered system.",
+    ],
+    outcome:
+      "PATT Hub became the central entry point for staff accessing internal web applications, reducing navigation time and improving awareness of available tools across departments.",
+    description:
+      "PATT Hub is an internal web dashboard built to consolidate access to the Port Authority's suite of internal web applications. Rather than staff navigating directly to individual systems, PATT Hub provides a single organized landing page with quick-access tiles, status indicators, and role-filtered visibility. Administrators can register new applications, update links, and manage access controls. The system is built with Node.js and deployed via Docker, providing a reliable and easily maintainable internal portal.",
+    duration: "1 month",
+    year: "2025",
+    image: project11Img,
+  },
+  {
+    id: 4,
+    title: "Enterprise Lease Management System (NDA-Protected)",
+    summary:
+      "A full-stack web application developed for an enterprise client to streamline internal lease management workflows. Due to a Non-Disclosure Agreement, all technical and operational details have been redacted.",
+    category: "Full Stack",
+    technologies: [],
+    features: ["Features redacted due to NDA"],
+    challenges: [
+      "Details regarding development challenges are confidential under an NDA agreement and cannot be shared.",
+    ],
+    outcome:
+      "Successfully delivered a secure, scalable internal system. Specific outcomes, metrics, and client processes are withheld in compliance with NDA requirements.",
+    description:
+      "This project involved building a proprietary enterprise-grade system. The architecture, workflow logic, and integration points are not publicly shareable. Only high-level information can be disclosed to respect the client's confidentiality obligations.",
+    duration: "3 months",
+    year: "2025",
+    image: project4Img,
+  },
+  {
+    id: 5,
+    title: "Enterprise Document Digitization System (NDA-Protected)",
+    summary:
+      "A secure, internal-use digitization platform created for a government agency. All functional details, integrations, and workflow descriptions have been redacted due to an active NDA.",
+    category: "Full Stack",
+    technologies: [],
+    features: ["Redacted due to NDA"],
+    challenges: ["Redacted due to NDA"],
+    outcome:
+      "Delivered a production-ready system that modernized internal document handling processes. Specific implementation details and performance results cannot be publicly disclosed.",
+    description:
+      "This system was designed to digitize and manage sensitive internal documentation. Technical architecture, database structure, and operational behavior remain confidential under NDA and cannot be displayed in a public portfolio.",
+    duration: "1.5 months",
+    year: "2025",
+    image: project7Img,
+  },
+  {
+    id: 9,
+    title: "Project Post-IT",
+    summary:
+      "Post meeting AI summary and action item generator. Takes in meeting audio and generates a summary of the meeting as well as action items for attendees.",
+    category: "FULL STACK + Generative AI Engineering",
+    technologies: [
+      "Python",
+      "Whisper",
+      "Node.js",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "MS SQL Server",
+    ],
+    features: [
+      "Meeting Audio Transcription via Whisper",
+      "AI-Generated Meeting Summaries",
+      "Automatic Action Item Extraction",
+      "Attendee-Specific Action Item Assignment",
+      "Meeting History & Archive",
+      "PDF/Document Export",
+      "Secure Audio File Upload",
+    ],
+    challenges: [
+      "Accurately transcribing long meetings with multiple speakers required experimenting with Whisper model sizes and pre-processing audio to improve clarity.",
+      "Extracting meaningful, attributed action items from unstructured transcripts required careful prompt engineering to distinguish decisions from general discussion.",
+      "Handling large audio files efficiently without timeouts required chunked uploads and asynchronous background processing pipelines.",
+      "Associating action items to specific attendees from natural conversation required heuristics and LLM reasoning to correctly link statements to individuals.",
+    ],
+    outcome:
+      "Project Post-IT successfully automated the post-meeting workflow, reducing the time spent on manual note-taking and follow-up. The system now generates reliable summaries and action items that attendees can immediately act on.",
+    description:
+      "Project Post-IT is a full-stack AI-powered tool that transforms meeting recordings into structured summaries and actionable follow-ups. Audio files are uploaded, transcribed using OpenAI's Whisper model, and then processed through an LLM pipeline to extract a clean summary and a list of action items attributed to attendees. The resulting output is stored in a database and can be exported as a formatted document. The system is containerized with Docker for easy deployment and supports multiple meeting audio formats.",
+    duration: "1 month",
+    year: "2025",
+    image: project9Img,
+  },
+  {
+    id: 8,
     title: "n8n Business Automations",
     summary:
       "Designed and deployed a fully containerized n8n automation system running on Docker, integrating AI-driven workflows to streamline business communication, automate repetitive tasks, and enhance operational efficiency. Implemented end-to-end solutions including email processing, chatbot interactions, and multi-platform API integrations.",
@@ -33,7 +224,7 @@ export const projects = [
       "This project involved building a comprehensive automation ecosystem using n8n, leveraging Docker for isolated and reproducible deployment. I created a series of interconnected workflows that fused AI processing with operational tasks-such as parsing emails, generating responses, triggering alerts, and interacting with chatbots on Meta, Telegram, and custom APIs. Integrations with Google Cloud and Meta Business Suite enabled advanced messaging capabilities, while PostgreSQL provided persistent workflow storage. Through iterative testing, prompt engineering, and API refinement, I delivered a robust automation platform tailored for real-world business needs.",
     duration: "2 months",
     year: "2025",
-    image: project2Img,
+    image: project8Img,
   },
   {
     id: 2,
@@ -140,23 +331,6 @@ export const projects = [
     image: project5Img,
   },
   {
-    id: 5,
-    title: "Enterprise Document Digitization System (NDA-Protected)",
-    summary:
-      "A secure, internal-use digitization platform created for a government agency. All functional details, integrations, and workflow descriptions have been redacted due to an active NDA.",
-    category: "Full Stack",
-    technologies: [],
-    features: ["Redacted due to NDA"],
-    challenges: ["Redacted due to NDA"],
-    outcome:
-      "Delivered a production-ready system that modernized internal document handling processes. Specific implementation details and performance results cannot be publicly disclosed.",
-    description:
-      "This system was designed to digitize and manage sensitive internal documentation. Technical architecture, database structure, and operational behavior remain confidential under NDA and cannot be displayed in a public portfolio.",
-    duration: "1.5 months",
-    year: "2025",
-    image: project4Img,
-  },
-  {
     id: 7,
     title: "HRMS Workflow Automation Module (NDA-Protected)",
     summary:
@@ -166,30 +340,11 @@ export const projects = [
     features: ["Redacted due to NDA"],
     challenges: ["Redacted due to NDA"],
     outcome:
-      "Successfully implemented within the client’s internal HR ecosystem. Further information is restricted in compliance with confidentiality obligations.",
+      "Successfully implemented within the client's internal HR ecosystem. Further information is restricted in compliance with confidentiality obligations.",
     description:
       "This project involved extending an existing HRMS with confidential internal workflows. The logic, data structures, and automation processes cannot be shared due to non-disclosure restrictions.",
     duration: "1 month",
     year: "2025",
     image: project6Img,
-  },
-  {
-    id: 4,
-    title: "Enterprise Lease Management System (NDA-Protected)",
-    summary:
-      "A full-stack web application developed for an enterprise client to streamline internal lease management workflows. Due to a Non-Disclosure Agreement, all technical and operational details have been redacted.",
-    category: "Full Stack",
-    technologies: [],
-    features: ["Features redacted due to NDA"],
-    challenges: [
-      "Details regarding development challenges are confidential under an NDA agreement and cannot be shared.",
-    ],
-    outcome:
-      "Successfully delivered a secure, scalable internal system. Specific outcomes, metrics, and client processes are withheld in compliance with NDA requirements.",
-    description:
-      "This project involved building a proprietary enterprise-grade system. The architecture, workflow logic, and integration points are not publicly shareable. Only high-level information can be disclosed to respect the client’s confidentiality obligations.",
-    duration: "3 months",
-    year: "2025",
-    image: project4Img,
   },
 ];
