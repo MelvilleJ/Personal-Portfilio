@@ -37,7 +37,7 @@ export const projects = [
       "Excel Styled Pivot Table Report Builder",
     ],
     challenges: [
-      "Understaning and modeling complex HR processes and data relationships required close collaboration with HR stakeholders to ensure the system met real-world needs.",
+      "Understanding and modeling complex HR processes and data relationships required close collaboration with HR stakeholders to ensure the system met real-world needs.",
       "Converting legacy paper-based workflows into efficient digital processes involved careful UI/UX design and iterative testing to ensure user adoption.",
       "Creating a secure, scalable database schema to handle sensitive employee data while maintaining performance was a critical aspect of the project.",
       "Integrating email notifications and alerts required building a reliable messaging system that could handle various HR events and trigger appropriate communications.",
