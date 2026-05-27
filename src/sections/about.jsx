@@ -77,6 +77,69 @@ const FloatingBlobs = () => {
           }}
         />
       </motion.svg>
+
+      {/* Blob 4 — top left, emerald */}
+      <motion.svg
+        className="absolute -top-16 -left-16 w-56 h-56"
+        viewBox="-100 -100 200 200"
+        variants={blobVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        transition={{ delay: 0.3 }}
+      >
+        <motion.path
+          d="M44.3,-56.8C57.1,-46.3,67.1,-31.6,70.8,-15.3C74.5,1,71.9,18.9,64.5,34.4C57.1,49.9,44.9,63,30.2,69.3C15.5,75.6,-1.7,75.1,-17.8,69.7C-33.9,64.3,-48.9,54,-58.1,40C-67.3,26,-70.7,8.3,-68.1,-8.5C-65.5,-25.3,-56.9,-41.2,-44.5,-51.7C-32.1,-62.2,-16,-67.3,0.7,-68.1C17.4,-68.9,31.5,-67.3,44.3,-56.8Z"
+          fill="rgba(16, 185, 129, 0.13)"
+          animate={{ y: [6, -6, 6], x: [-10, 10, -10], rotate: [0, -360] }}
+          transition={{
+            y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 35, repeat: Infinity, ease: "linear" },
+          }}
+        />
+      </motion.svg>
+
+      {/* Blob 5 — center right, rose */}
+      <motion.svg
+        className="absolute top-1/2 -right-16 w-60 h-60"
+        viewBox="-100 -100 200 200"
+        variants={blobVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        transition={{ delay: 0.8 }}
+      >
+        <motion.path
+          d="M46.5,-58.2C59.3,-47.4,67.9,-31.3,71.2,-14.2C74.5,2.9,72.5,21,64.8,36.4C57.1,51.8,43.7,64.5,28.2,71.2C12.7,77.9,-4.9,78.6,-21.4,73.5C-37.9,68.4,-53.3,57.5,-62.5,43C-71.7,28.5,-74.7,10.4,-72.2,-6.8C-69.7,-24,-61.7,-40.3,-49.6,-51.4C-37.5,-62.5,-21.3,-68.4,-3.8,-68.5C13.7,-68.6,33.7,-69,46.5,-58.2Z"
+          fill="rgba(244, 63, 94, 0.1)"
+          animate={{ y: [-12, 12, -12], x: [5, -5, 5], rotate: [0, 360] }}
+          transition={{
+            y: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 45, repeat: Infinity, ease: "linear" },
+          }}
+        />
+      </motion.svg>
+
+      {/* Blob 6 — bottom center, indigo, small */}
+      <motion.svg
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 w-44 h-44"
+        viewBox="-100 -100 200 200"
+        variants={blobVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        transition={{ delay: 1.3 }}
+      >
+        <motion.path
+          d="M35.2,-44.1C45.4,-35.2,53.6,-23.3,57.1,-9.8C60.6,3.7,59.4,18.8,53,31.8C46.6,44.8,35,55.7,21.4,61.3C7.8,66.9,-7.8,67.2,-22.1,62.2C-36.4,57.2,-49.4,46.9,-57.1,33.4C-64.8,19.9,-67.2,3.2,-64.2,-12.4C-61.2,-28,-52.8,-42.5,-41,-51.3C-29.2,-60.1,-14.6,-63.2,-0.5,-62.6C13.6,-62,25,-53,35.2,-44.1Z"
+          fill="rgba(99, 102, 241, 0.11)"
+          animate={{ y: [8, -8, 8], x: [-6, 6, -6], rotate: [0, -360] }}
+          transition={{
+            y: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: 50, repeat: Infinity, ease: "linear" },
+          }}
+        />
+      </motion.svg>
     </div>
   );
 };
