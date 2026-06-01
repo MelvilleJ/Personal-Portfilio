@@ -1,14 +1,18 @@
-import project1Img from "../assets/projectimages/project1.png";
-import project2Img from "../assets/hrms/employeeview.png";
-import project3Img from "../assets/projectimages/project3.png";
-import project4Img from "../assets/leasetracking/search.png";
-import project5Img from "../assets/projectimages/project5.png";
-import project6Img from "../assets/projectimages/project6.png";
-import project7Img from "../assets/td4/dashboard.png";
-import project8Img from "../assets/n8n/workflow.png";
-import project9Img from "../assets/post-it/main.png";
-import project10Img from "../assets/helpdesk/queue.png";
-import project11Img from "../assets/patthub/main.png";
+import {
+  project1Img,
+  project2Img,
+  project3Img,
+  project4Img,
+  project5Img,
+  project6Img,
+  project7Img,
+  project8Img,
+  project9ImgMain as project9Img,
+  project10Img,
+  project11Img,
+  project12Img,
+  project13Img,
+} from "./projectImages";
 export const projects = [
   {
     id: 1,
@@ -49,6 +53,70 @@ export const projects = [
     duration: "Ongoing",
     year: "2025",
     image: project2Img,
+  },
+  {
+    id: 12,
+    title: "Personal Portfolio Website",
+    summary:
+      "A personal portfolio website to showcase my skills, projects, and experience.",
+    category: "Full Stack",
+    technologies: ["Node.js", "React", "JavaScript", "MS SQL Server", "Docker"],
+    features: [
+      "Responsive Design",
+      "Interactive Elements",
+      "Project Showcase",
+      "Contact Form",
+      "Skills Display",
+      "Experience Timeline",
+    ],
+    challenges: [
+      "Creating a visually appealing and user-friendly interface that effectively showcases my work and skills.",
+      "Implementing a smooth and intuitive navigation system that allows visitors to easily find the information they need.",
+      "Optimizing the website for performance and loading times to ensure a good user experience across different devices and network conditions.",
+    ],
+    outcome:
+      "The personal portfolio website successfully showcases my skills, projects, and experience in a visually appealing and user-friendly manner.",
+    description:
+      "This project involved building a personal portfolio website to highlight my professional background, skills, and completed projects. The site features a responsive design, interactive elements, and a clean layout that effectively communicates my value as a developer.",
+    duration: "1 month",
+    year: "2025",
+    image: project12Img,
+  },
+  {
+    id: 13,
+    title: "Leased-In",
+    summary:
+      "A web-based application for creating an online community for tenants, landlords and service providers to connect and share information about rental properties, maintenance, and local resources.",
+    category: "Full Stack",
+    technologies: [
+      "Node.js",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Clerk for Authentication",
+      "Docker",
+    ],
+    features: [
+      "Centralized Rental Property Database",
+      "Tenant & Landlord Profile Management",
+      "Property Listing & Search Functionality",
+      "Maintenance Request System",
+      "Local Resource Directory",
+      "Role-Based Access Control",
+    ],
+    challenges: [
+      "Designing a user-friendly interface that caters to both tenants and landlords while effectively showcasing property listings and resources.",
+      "Implementing a robust authentication and authorization system to manage different user roles and permissions securely.",
+      "Ensuring the application can handle a growing database of properties, users, and maintenance requests while maintaining performance.",
+    ],
+    outcome:
+      "The final Leased-In application provided a comprehensive solution for creating an online community for tenants, landlords, and service providers, significantly improving connectivity and information sharing. The system is now a core tool for the Port Authority's real estate department, streamlining property management and enhancing user experience.",
+    description:
+      "This project involved building a full-stack web application for creating an online community for tenants, landlords, and service providers to connect and share information about rental properties, maintenance, and local resources. The system features a centralized property database, user profile management, property listing and search functionality, maintenance request system, and local resource directory. Built with Next.js and Supabase, the application is deployed using Docker for scalability and ease of maintenance. The Leased-In platform has become an essential tool for managing rental property information and fostering community engagement within the organization.",
+    duration: "Ongoing",
+    year: "2026",
+    image: project13Img,
   },
   {
     id: 10,

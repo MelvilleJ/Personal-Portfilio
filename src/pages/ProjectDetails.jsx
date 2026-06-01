@@ -32,14 +32,6 @@ export default function ProjectDetails() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            {/* <button
-              onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4 text-sm"
-            >
-              <ArrowLeft size={16} />
-              Back
-            </button> */}
-
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
               <span className="px-3 py-1 sm:px-4 sm:py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-xs sm:text-sm font-medium border border-emerald-500/30">
                 {project.category}

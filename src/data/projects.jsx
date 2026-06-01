@@ -1,14 +1,18 @@
-import project1Img from "../assets/projectimages/project1.png";
-import project9Img from "../assets/post-it/login.png";
-import project8Img from "../assets/n8n/workflow.png";
-import project2Img from "../assets/hrms/employeeview.png";
-import project3Img from "../assets/projectimages/project3.png";
-import project4Img from "../assets/leasetracking/search.png";
-import project5Img from "../assets/projectimages/project5.png";
-import project6Img from "../assets/projectimages/project6.png";
-import project7Img from "../assets/td4/dashboard.png";
-import project10Img from "../assets/helpdesk/queue.png";
-import project11Img from "../assets/patthub/main.png";
+import {
+  project1Img,
+  project2Img,
+  project3Img,
+  project4Img,
+  project5Img,
+  project6Img,
+  project7Img,
+  project8Img,
+  project9ImgLogin as project9Img,
+  project10Img,
+  project11Img,
+  project12Img,
+  project13Img,
+} from "./projectImages";
 export const projects = [
   {
     id: 1,
@@ -17,6 +21,22 @@ export const projects = [
       "Human Resources Management System for managing employee data and HR processes at the Port Authourity of Trinidad and Tobago.",
     category: "Full Stack",
     image: project2Img,
+  },
+  {
+    id: 12,
+    title: "Personal Portfolio Website",
+    summary:
+      "A personal portfolio website to showcase my skills, projects, and experience.",
+    category: "Full Stack",
+    image: project12Img,
+  },
+  {
+    id: 13,
+    title: "Leased-In",
+    summary:
+      "A web-based application for creating an online community for tenants, landlords and service providers to connect and share information about rental properties, maintenance, and local resources.",
+    category: "Full Stack",
+    image: project13Img,
   },
   {
     id: 10,
