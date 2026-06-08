@@ -135,6 +135,7 @@ export const projects = [
     features: [
       "Ticket Creation, Assignment & Management",
       "Priority & Category Classification",
+      "Solutions Knowledge Base",
       "Technician Task Assignment & Workload Tracking",
       "Real-Time Status Updates",
       "Email Notifications for Ticket Events",
