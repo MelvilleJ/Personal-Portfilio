@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
 import gsap from "gsap";
-import { motion, useMotionValue, useSpring } from "framer-motion";
 
 function HERO() {
   const typedRef = useRef(null);
@@ -40,36 +39,9 @@ function HERO() {
       }
     );
   }, []);
-  const containerRef = useRef(null);
 
-  // Track raw mouse position
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Smooth the motion with spring physics
-  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 });
-  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 });
-
-  const handleMouseMove = (e) => {
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  };
   return (
-    <section
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="bg-gradient-to-bl from-blue-950 to-slate-950  section-home h-full "
-    >
-      <motion.div
-        className="pointer-events-none absolute w-100 h-100 rounded-full bg-blue-950 opacity-25 blur-[100px]"
-        style={{
-          x: smoothX,
-          y: smoothY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-      />
+    <section className="relative section-home h-full">
       <div
         ref={boxRef}
         className="raleway-sub my-50 mx-auto flex flex-col justify-center items-center h-full"
