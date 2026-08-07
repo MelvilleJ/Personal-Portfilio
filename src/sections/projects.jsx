@@ -1,8 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import ProjectCard from "../components/projectcards.jsx";
+import { LayoutGrid, List } from "lucide-react";
+import ProjectCard, { ProjectRow } from "../components/projectcards.jsx";
 import { projects } from "../data/projects.jsx";
+
+const VIEWS = [
+  { id: "grid", label: "Grid", Icon: LayoutGrid },
+  { id: "list", label: "List", Icon: List },
+];
+
 const ProjectsSection = () => {
+  const [view, setView] = useState("grid");
+
   return (
     <div
       id="projects"
@@ -34,11 +43,55 @@ const ProjectsSection = () => {
           various domains
         </motion.p>
       </motion.div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
-        {projects.map((project, index) => (
-          <ProjectCard key={project.title} {...project} delay={index * 0.1} />
-        ))}
+
+      <div className="max-w-6xl mx-auto px-4 mb-8 flex justify-end">
+        <div
+          role="group"
+          aria-label="Project layout"
+          className="inline-flex gap-1 rounded-lg border border-white/15 bg-white/5 p-1"
+        >
+          {VIEWS.map(({ id, label, Icon }) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setView(id)}
+              aria-pressed={view === id}
+              className={`flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${
+                view === id
+                  ? "bg-white/15 text-white"
+                  : "text-white/60 hover:text-white"
+              }`}
+            >
+              <Icon size={16} />
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
+
+      {view === "grid" ? (
+        <div
+          key="grid"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4"
+        >
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} {...project} delay={index * 0.1} />
+          ))}
+        </div>
+      ) : (
+        <div
+          key="list"
+          className="flex flex-col gap-4 max-w-6xl mx-auto px-4"
+        >
+          {projects.map((project, index) => (
+            <ProjectRow
+              key={project.title}
+              {...project}
+              delay={Math.min(index, 6) * 0.05}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

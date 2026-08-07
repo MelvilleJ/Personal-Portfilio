@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 
 const ProjectCard = ({
   title,
@@ -67,6 +68,55 @@ const ProjectCard = ({
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/10 to-transparent" />
       </div>
+    </motion.a>
+  );
+};
+
+export const ProjectRow = ({
+  title,
+  id,
+  summary,
+  category,
+  image,
+  delay = 0,
+}) => {
+  return (
+    <motion.a
+      href={`/projectdetails/${id}`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ x: 6 }}
+      transition={{ duration: 0.5, delay }}
+      viewport={{ once: true }}
+      className="project-row group cursor-pointer flex items-center gap-4 sm:gap-6 rounded-2xl overflow-hidden bg-black/20 p-4"
+    >
+      <div className="h-20 w-28 sm:h-24 sm:w-40 shrink-0 overflow-hidden rounded-xl">
+        <img
+          src={image}
+          alt={title}
+          loading="lazy"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="text-xs uppercase tracking-wider text-white/80 font-semibold line-clamp-1">
+          {category}
+        </div>
+
+        <h3 className="mt-1 text-lg md:text-xl font-bold text-white leading-tight line-clamp-1">
+          {title}
+        </h3>
+
+        <p className="mt-1 text-white/90 text-sm leading-relaxed line-clamp-2">
+          {summary}
+        </p>
+      </div>
+
+      <ChevronRight
+        size={20}
+        className="hidden sm:block shrink-0 text-white/40 group-hover:text-white transition-colors duration-300"
+      />
     </motion.a>
   );
 };
