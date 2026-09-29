@@ -1,21 +1,26 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import earthUrl from "../assets/earth/earth-blue-marble.jpg";
+import earthUrl from "../assets/earth/earth-blue-marble.webp";
+import { FOCUS_EVENT } from "./globefocus";
 
 // ─── tuning ────────────────────────────────────────────────────────────────
 const STAR_COUNT = 700;
 const ARC_COUNT = 14;
 const ARC_SEGMENTS = 80;
 const PLANET_DIAMETER_VH = 62; // planet diameter as % of viewport height
+const PLANET_MAX_VW = 88; // ...capped so it fits on portrait screens
 const GLOBE_OFFSET_VH = 0; // + moves the globe up from the viewport centre
 const SPIN_SPEED = 0.05; // rad/s
 const PARALLAX_X = 0.14;
 const PARALLAX_Y = 0.1;
-const LAND_STRIDE = 4; // map sampling step (2048x1024 map → ~44k land points)
+// Longitude cells sampled from the map, independent of its resolution.
+const SAMPLE_COLS = { desktop: 512, mobile: 340 }; // ~44k / ~19k land points
 const OCEAN_EVERY = 4; // 1 in N ocean cells becomes a dim particle
 const TRAVEL_SECONDS = 2.0; // per-particle formation travel time
 const ARC_SPEED = [0.18, 0.4]; // pulse laps per second (min, max)
 const TRINIDAD = { lat: 10.45, lon: -61.25 };
+const FOCUS_TURN_RATE = 3; // how quickly the globe swings round to face Trinidad
+const HOVER_RADIUS = 120; // css px around the cursor where city windows switch on
 const BACK_ALPHA = 0.06; // far-hemisphere visibility, keeps the globe from flickering as it spins
 
 // Scroll morph: 0 = globe, 1 = city. Completes once the target section's top
@@ -98,7 +103,7 @@ function latLonToDir(latDeg, lonDeg) {
 // a sparse subset of ocean pixels become dim ones.
 // Returns flat [x, y, z, ...] arrays of unit directions (north = +Y,
 // Greenwich facing +Z so Africa/Europe are visible on load).
-function sampleEarth(img) {
+function sampleEarth(img, cols) {
   const w = img.width;
   const h = img.height;
   const c = document.createElement("canvas");
@@ -110,8 +115,11 @@ function sampleEarth(img) {
 
   const land = [];
   const ocean = [];
-  for (let iy = 0, y = 0; y < h; y += LAND_STRIDE, iy++) {
-    for (let ix = 0, x = 0; x < w; x += LAND_STRIDE, ix++) {
+  const rows = cols / 2;
+  for (let iy = 0; iy < rows; iy++) {
+    const y = Math.floor((iy * h) / rows);
+    for (let ix = 0; ix < cols; ix++) {
+      const x = Math.floor((ix * w) / cols);
       const i = (y * w + x) * 4;
       const r = px[i];
       const g = px[i + 1];
@@ -276,6 +284,9 @@ const POINTS_VERT = /* glsl */ `
   uniform vec3 uGlobe;
   uniform mat3 uTilt;
   uniform vec3 uWindowColor;
+  uniform vec2 uPointer; // framebuffer px, bottom-left origin
+  uniform vec2 uResolution;
+  uniform float uHoverRadius;
   attribute vec3 aStart;
   attribute vec3 aScatter;
   attribute vec4 aCity;
@@ -324,16 +335,20 @@ const POINTS_VERT = /* glsl */ `
     vec3 city = vec3(aCity.xy * uView, aCity.z);
     float im = 1.0 - m;
     vec3 p = im * im * sphere + 2.0 * im * m * scatter + m * m * city;
-    float isWindow = step(0.0, aWin);
-    float lit = mix(1.0, mix(0.08, 1.0, windowLight(aWin, uTime)), isWindow);
-    float yellow = isWindow * step(fract(aWin * 7.0), 0.75);
-    vColor = mix(aColor, uWindowColor, yellow * m);
-    vAlpha = mix(sphereAlpha, aCity.w * lit, m);
-    vMorph = m;
 
     vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
     gl_PointSize = uSize * (uScale / -mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
+
+    vec2 screen = (gl_Position.xy / gl_Position.w * 0.5 + 0.5) * uResolution;
+    float near = 1.0 - smoothstep(uHoverRadius * 0.4, uHoverRadius, distance(screen, uPointer));
+    float isWindow = step(0.0, aWin);
+    float light = max(windowLight(aWin, uTime), near);
+    float lit = mix(1.0, mix(0.08, 1.0, light) * (1.0 + 0.9 * near), isWindow);
+    float yellow = isWindow * max(step(fract(aWin * 7.0), 0.75), near);
+    vColor = mix(aColor, uWindowColor, yellow * m);
+    vAlpha = mix(sphereAlpha, aCity.w * lit, m);
+    vMorph = m;
   }
 `;
 
@@ -413,6 +428,9 @@ function buildPoints(coords, { city, win }, getCol, radius, size, opacity, [dMin
       uGlobe: { value: new THREE.Vector3() },
       uTilt: { value: new THREE.Matrix3() },
       uWindowColor: { value: BRAND.window },
+      uPointer: { value: new THREE.Vector2(-1e6, -1e6) },
+      uResolution: { value: new THREE.Vector2(1, 1) },
+      uHoverRadius: { value: HOVER_RADIUS },
       uAvoid: { value: new THREE.Vector4(-1e6, -1e6, -1e6, -1e6) },
       uAvoidFeather: { value: 1 },
       uAvoidAlpha: { value: TEXT_AVOID_ALPHA },
@@ -640,7 +658,10 @@ function PARTICLEFIELD({ morphTargetId }) {
     const img = new Image();
     img.onload = () => {
       if (disposed) return;
-      const { land, ocean } = sampleEarth(img);
+      const cols = window.matchMedia(MORPH_MEDIA).matches ? SAMPLE_COLS.desktop : SAMPLE_COLS.mobile;
+      const { land, ocean } = sampleEarth(img, cols);
+      // Fewer samples means wider gaps; grow the dots to keep the globe solid.
+      const sizeScale = Math.sqrt(SAMPLE_COLS.desktop / cols);
 
       earthTex = new THREE.Texture(img);
       earthTex.colorSpace = THREE.SRGBColorSpace;
@@ -655,8 +676,8 @@ function PARTICLEFIELD({ morphTargetId }) {
       const landCity = sampleCity(skyline, land.length / 3, "structure", rand);
       const oceanCity = sampleCity(skyline, ocean.length / 3, "fill", rand);
 
-      const landPoints = buildPoints(land, landCity, landCol, 1.012, 0.017, 0.9, [0, 1.0], dotTex);
-      const oceanPoints = buildPoints(ocean, oceanCity, oceanCol, 1.0, 0.015, 0.4, [0.4, 1.6], dotTex);
+      const landPoints = buildPoints(land, landCity, landCol, 1.012, 0.017 * sizeScale, 0.9, [0, 1.0], dotTex);
+      const oceanPoints = buildPoints(ocean, oceanCity, oceanCol, 1.0, 0.015 * sizeScale, 0.4, [0.4, 1.6], dotTex);
       scene.add(landPoints, oceanPoints);
       const built = buildArcs(ARC_COUNT, ARC_SEGMENTS, 1.02, BRAND.arc, land, dotTex);
       planet.add(built.group);
@@ -683,7 +704,10 @@ function PARTICLEFIELD({ morphTargetId }) {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
-      const targetPx = (PLANET_DIAMETER_VH / 100) * window.innerHeight;
+      const targetPx = Math.min(
+        (PLANET_DIAMETER_VH / 100) * window.innerHeight,
+        (PLANET_MAX_VW / 100) * window.innerWidth
+      );
       const worldHeight = (2 * h) / targetPx;
       camera.position.z = worldHeight / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)));
       camera.updateProjectionMatrix();
@@ -724,13 +748,29 @@ function PARTICLEFIELD({ morphTargetId }) {
     );
     io.observe(container);
 
-    // Mouse parallax.
-    const pointer = { x: 0, y: 0 };
+    // Mouse parallax and window hover.
+    const pointer = { x: 0, y: 0, clientX: 0, clientY: 0, hovering: false };
     const onPointerMove = (e) => {
       pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
       pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+      pointer.clientX = e.clientX;
+      pointer.clientY = e.clientY;
+      pointer.hovering = e.pointerType === "mouse";
     };
-    if (!reduceMotion) window.addEventListener("pointermove", onPointerMove);
+    const onPointerOut = (e) => {
+      if (!e.relatedTarget) pointer.hovering = false;
+    };
+    if (!reduceMotion) {
+      window.addEventListener("pointermove", onPointerMove);
+      window.addEventListener("pointerout", onPointerOut);
+    }
+
+    const focus = { active: false, k: 0 };
+    const onFocus = (e) => {
+      focus.active = Boolean(e.detail);
+    };
+    window.addEventListener(FOCUS_EVENT, onFocus);
+    const homeAngle = -THREE.MathUtils.degToRad(TRINIDAD.lon);
 
     const avoidEls = Array.from(document.querySelectorAll("[data-particle-avoid]"));
     const avoidRect = new THREE.Vector4();
@@ -762,11 +802,25 @@ function PARTICLEFIELD({ morphTargetId }) {
     const markerNormal = new THREE.Vector3();
     const toCamera = new THREE.Vector3();
 
+    const pointerPx = new THREE.Vector2();
+    const resolution = new THREE.Vector2();
+
     const update = (t, dt) => {
       tilt.updateMatrix();
+      const dpr = renderer.getPixelRatio();
       if (morph.current > 0) readAvoidRect();
-      const feather = TEXT_AVOID_FEATHER * renderer.getPixelRatio();
+      const feather = TEXT_AVOID_FEATHER * dpr;
+      renderer.getDrawingBufferSize(resolution);
+      if (pointer.hovering) {
+        const c = canvas.getBoundingClientRect();
+        pointerPx.set((pointer.clientX - c.left) * dpr, (c.bottom - pointer.clientY) * dpr);
+      } else {
+        pointerPx.set(-1e6, -1e6);
+      }
       for (const mat of intro.pointMats) {
+        mat.uniforms.uPointer.value.copy(pointerPx);
+        mat.uniforms.uResolution.value.copy(resolution);
+        mat.uniforms.uHoverRadius.value = HOVER_RADIUS * dpr;
         mat.uniforms.uTilt.value.setFromMatrix4(tilt.matrix);
         mat.uniforms.uAvoid.value.copy(avoidRect);
         mat.uniforms.uAvoidFeather.value = feather;
@@ -798,10 +852,11 @@ function PARTICLEFIELD({ morphTargetId }) {
       toCamera.copy(camera.position).sub(markerPos).normalize();
       const facing = clamp01((markerNormal.dot(toCamera) + 0.05) / 0.3);
       const kMarker = easeOutCubic(clamp01((t - 3.0) / 1.0)) * facing * globeFade;
-      const phase = reduceMotion ? 0.3 : (t * 0.6) % 1;
-      ring.scale.setScalar(1 + phase * 2.5);
+      const phase = reduceMotion ? 0.3 : (t * (0.6 + 0.6 * focus.k)) % 1;
+      ring.scale.setScalar(1 + phase * (2.5 + 2 * focus.k));
       ringMat.opacity = (1 - phase) * 0.8 * kMarker;
       dotMat.opacity = kMarker;
+      dotMat.size = 0.09 * (1 + 0.6 * focus.k);
     };
 
     function renderStatic() {
@@ -810,12 +865,20 @@ function PARTICLEFIELD({ morphTargetId }) {
       renderer.render(scene, camera);
     }
 
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
     const tick = () => {
       raf = requestAnimationFrame(tick);
       if (!inView) return;
-      const dt = Math.min(clock.getDelta(), 0.05);
-      planet.rotation.y += SPIN_SPEED * dt;
+      timer.update();
+      const dt = Math.min(timer.getDelta(), 0.05);
+      focus.k += ((focus.active ? 1 : 0) - focus.k) * (1 - Math.exp(-dt * 6));
+      if (focus.active) {
+        const turns = Math.round((planet.rotation.y - homeAngle) / (Math.PI * 2));
+        const target = homeAngle + turns * Math.PI * 2;
+        planet.rotation.y += (target - planet.rotation.y) * (1 - Math.exp(-dt * FOCUS_TURN_RATE));
+      } else {
+        planet.rotation.y += SPIN_SPEED * dt;
+      }
       const tx = pointer.x * PARALLAX_X;
       const ty = -pointer.y * PARALLAX_Y;
       tilt.rotation.y += (tx - tilt.rotation.y) * 0.05;
@@ -835,6 +898,8 @@ function PARTICLEFIELD({ morphTargetId }) {
       ro.disconnect();
       io.disconnect();
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerout", onPointerOut);
+      window.removeEventListener(FOCUS_EVENT, onFocus);
       window.removeEventListener("scroll", readScroll);
       window.removeEventListener("resize", readScroll);
       morphMedia.removeEventListener("change", readScroll);
