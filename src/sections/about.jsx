@@ -51,6 +51,7 @@ function ABOUT() {
         variants={variants.container}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
+        data-particle-avoid
         className="raleway-sub relative z-10 mx-auto w-full max-w-6xl grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-12"
       >
         <div className="lg:col-span-5">

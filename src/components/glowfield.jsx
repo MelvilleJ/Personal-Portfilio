@@ -35,10 +35,12 @@ function GLOWFIELD({ children, className = "" }) {
       onMouseLeave={() => visible.set(0)}
       className={`relative ${className}`}
     >
+      {children}
+      {/* Above the particle canvas, which would otherwise occlude the glow and look dimmer by contrast. */}
       {!reduceMotion && (
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-0 h-[620px] w-[620px] rounded-full"
+          className="pointer-events-none absolute top-0 left-0 mix-blend-screen h-[620px] w-[620px] rounded-full"
           style={{
             x: smoothX,
             y: smoothY,
@@ -50,7 +52,6 @@ function GLOWFIELD({ children, className = "" }) {
           }}
         />
       )}
-      {children}
     </div>
   );
 }
