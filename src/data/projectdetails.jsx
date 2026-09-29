@@ -111,9 +111,9 @@ export const projects = [
       "Ensuring the application can handle a growing database of properties, users, and maintenance requests while maintaining performance.",
     ],
     outcome:
-      "The final Leased-In application provided a comprehensive solution for creating an online community for tenants, landlords, and service providers, significantly improving connectivity and information sharing. The system is now a core tool for the Port Authority's real estate department, streamlining property management and enhancing user experience.",
+      "Leased-In is an independent project still in active development. It brings tenants, landlords, and service providers into one place to share rental property information, handle maintenance requests, and find local resources.",
     description:
-      "This project involved building a full-stack web application for creating an online community for tenants, landlords, and service providers to connect and share information about rental properties, maintenance, and local resources. The system features a centralized property database, user profile management, property listing and search functionality, maintenance request system, and local resource directory. Built with Next.js and Supabase, the application is deployed using Docker for scalability and ease of maintenance. The Leased-In platform has become an essential tool for managing rental property information and fostering community engagement within the organization.",
+      "This project involved building a full-stack web application for creating an online community for tenants, landlords, and service providers to connect and share information about rental properties, maintenance, and local resources. The system features a centralized property database, user profile management, property listing and search functionality, maintenance request system, and local resource directory. Built with Next.js and Supabase, the application is deployed using Docker for scalability and ease of maintenance. The platform is designed to make rental information easier to find and to connect the people involved in renting a property.",
     duration: "Ongoing",
     year: "2026",
     image: project13Img,
