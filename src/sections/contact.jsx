@@ -5,10 +5,9 @@ function CONTACT() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [company, setCompany] = useState("");
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const webhookUrl = import.meta.env.VITE_WEBHOOKURL;
 
   const handleSubmit = async () => {
     if (!name || !email || !message) {
@@ -18,18 +17,18 @@ function CONTACT() {
     setLoading(true);
     setStatus("");
     try {
-      const response = await fetch(webhookUrl, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, company }),
       });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        setStatus(data.error ?? "Error sending message. Please try again later.");
+        return;
+      }
 
-      const data = await response.json();
-
-      let reply = data.output || "Thank you for your message!";
-      reply = reply.replace(/^"(.*)"$/, "$1").replace(/\\u2019/g, "’");
-
-      setStatus(reply);
+      setStatus("Thanks for reaching out! I'll get back to you within 24 hours.");
 
       setName("");
       setEmail("");
@@ -86,6 +85,18 @@ function CONTACT() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+
+            {/* Honeypot for bots; hidden from people and assistive tech. */}
+            <input
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
 
             <textarea
               className="w-full p-4 bg-white rounded-lg border-2 border-gray-200 focus:border-green-500 focus:outline-none transition-colors duration-300 text-gray-700 placeholder-gray-400 resize-none"
