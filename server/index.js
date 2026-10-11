@@ -12,6 +12,8 @@ const LIMITS = { name: 120, email: 254, message: 5000 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX = 5;
+const NTFY_SERVER = process.env.NTFY_SERVER ?? "https://ntfy.sh";
+const NTFY_TOPIC = process.env.NTFY_TOPIC;
 
 // Connection settings come from the standard PGHOST/PGPORT/PGDATABASE/PGUSER/PGPASSWORD env vars.
 const pool = new pg.Pool();
@@ -80,6 +82,27 @@ function validate(body) {
   return { fields };
 }
 
+// JSON publishing instead of ntfy's header API: headers can't carry non-ASCII names.
+function notifyNewContact({ name, email, message }) {
+  if (!NTFY_TOPIC) return;
+  fetch(NTFY_SERVER, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      topic: NTFY_TOPIC,
+      title: `New contact: ${name}`,
+      message: `${email}\n\n${message}`,
+      tags: ["email"],
+      click: `mailto:${email}`,
+    }),
+    signal: AbortSignal.timeout(5000),
+  })
+    .then((res) => {
+      if (!res.ok) console.error(`ntfy responded ${res.status}`);
+    })
+    .catch((err) => console.error("ntfy notification failed:", err));
+}
+
 async function handleContact(req, res) {
   const ip = clientIp(req);
   if (rateLimited(ip)) {
@@ -97,6 +120,7 @@ async function handleContact(req, res) {
     "INSERT INTO contact_messages (name, email, message, ip, user_agent) VALUES ($1, $2, $3, $4, $5)",
     [fields.name, fields.email, fields.message, ip, req.headers["user-agent"] ?? null]
   );
+  notifyNewContact(fields);
   send(res, 201, { ok: true });
 }
 
@@ -108,6 +132,15 @@ const server = http.createServer(async (req, res) => {
       await pool.query("SELECT 1");
       return send(res, 200, { ok: true });
     }
+    if (req.method === "GET" && pathname === "/api/testimonials") {
+      const { rows } = await pool.query(
+        `SELECT id, quote, author, role, company, avatar_url, rating, featured
+           FROM testimonials
+          WHERE active
+          ORDER BY featured DESC, position, id`
+      );
+      return send(res, 200, { testimonials: rows });
+    }
     send(res, 404, { error: "Not found" });
   } catch (err) {
     if (err.status) return send(res, err.status, { error: err.message });
@@ -117,7 +150,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`Contact API listening on http://${HOST}:${PORT}`);
+  console.log(`API listening on http://${HOST}:${PORT}`);
 });
 
 const shutdown = () => server.close(() => pool.end().then(() => process.exit(0)));

@@ -5,6 +5,7 @@ import ABOUT from "../sections/about";
 import BACKDROP from "../components/backdrop";
 import GLOWFIELD from "../components/glowfield";
 import MESSAGE from "../sections/message";
+import TESTIMONIALS from "../sections/testimonials";
 import CONTACT from "../sections/contact";
 import "../App.css";
 
@@ -23,6 +24,7 @@ export default function Home() {
         <ABOUT />
       </GLOWFIELD>
       <MESSAGE />
+      <TESTIMONIALS />
       <CONTACT />
     </>
   );
